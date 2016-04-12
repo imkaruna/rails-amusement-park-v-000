@@ -20,6 +20,14 @@
             <span class="icon-bar"></span>
           </button>
         <a class="navbar-brand" href="<%= root_url %>"/>Home</a>
+        <% if logged_in? %>
+        <%= link_to "Hello, #{current_user.name}!", user_path(current_user),class: "navbar-brand navbar-menu-item" %>
+        <%= link_to 'Attractions', attractions_path, class: "navbar-brand navbar-menu-item"%>
+        <%= link_to 'Log Out', session_path(session[:user_id]), method: :delete, class: "navbar-brand navbar-menu-item" %>
+        <% else %>
+        <%= link_to 'Sign up', new_user_path, class: "navbar-brand navbar-menu-item"%>
+        <%= link_to 'Sign in',signin_path, class: "navbar-brand navbar-menu-item"%>
+        <% end %>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -31,6 +39,8 @@
 
     <!-- content -->
     <div class="container"  role="main">
+      <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
       <%= yield %>
     </div>
 
